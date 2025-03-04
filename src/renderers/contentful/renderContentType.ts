@@ -20,18 +20,8 @@ export default function renderContentType(contentType: ContentType, localization
 
   return `
     ${renderInterface({ name: `${name}Fields`, fields })}
-
-    ${descriptionComment(contentType.description)}
     ${renderInterface({ name, extension: `Entry<${name}Fields>`, fields: sys })}
   `
-}
-
-function descriptionComment(description: string | undefined) {
-  if (description) {
-    return `/** ${description} */`
-  }
-
-  return ""
 }
 
 function renderContentTypeFields(fields: Field[], localization: boolean): string {
@@ -55,7 +45,7 @@ function renderContentTypeFields(fields: Field[], localization: boolean): string
 
       return renderField(field, functionMap[field.type](field), localization)
     })
-    .join("\n\n")
+    .join("\n")
 }
 
 function renderSys(sys: Sys) {

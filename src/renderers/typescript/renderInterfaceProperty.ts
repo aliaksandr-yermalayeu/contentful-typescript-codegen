@@ -6,7 +6,6 @@ export default function renderInterfaceProperty(
   description?: string,
 ): string {
   return [
-    descriptionComment(description),
     name,
     required ? "" : "?",
     ": ",
@@ -14,12 +13,4 @@ export default function renderInterfaceProperty(
     required ? "" : " | undefined",
     ";",
   ].join("")
-}
-
-function descriptionComment(description: string | undefined) {
-  if (description) {
-    return `/** ${description} */\n`
-  } else {
-    return ""
-  }
 }

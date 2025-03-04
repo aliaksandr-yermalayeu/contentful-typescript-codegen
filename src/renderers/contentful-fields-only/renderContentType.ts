@@ -48,5 +48,5 @@ function renderContentTypeFields(fields: Field[]): string {
 
       return renderField(field, functionMap[field.type](field))
     })
-    .join("\n\n")
+    .join("\n")
 }
