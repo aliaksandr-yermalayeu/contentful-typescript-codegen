@@ -11,8 +11,8 @@ export default function renderInterface({
 }) {
   return `
     ${description ? `/** ${description} */` : ""}
-    export interface ${name} ${extension ? `extends ${extension}` : ""} {
+    export type ${name} = {
       ${fields}
-    }
+    } ${extension ? `& ${extension}` : ""}
   `
 }
