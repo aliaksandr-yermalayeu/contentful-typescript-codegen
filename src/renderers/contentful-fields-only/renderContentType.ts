@@ -31,7 +31,7 @@ function renderContentTypeFields(fields: Field[]): string {
   return fields
     .filter(field => !field.omitted)
     .map<string>(field => {
-      const functionMap: Record<FieldType, (field: Field) => string> = {
+      const functionMap: Record<FieldType | "ResourceLink", (field: Field) => string> = {
         Array: renderArray,
         Boolean: renderBoolean,
         Date: renderSymbol,
@@ -40,6 +40,7 @@ function renderContentTypeFields(fields: Field[]): string {
         Location: renderLocation,
         Number: renderNumber,
         Object: renderObject,
+        ResourceLink: renderLink,
         RichText: renderRichText,
         Symbol: renderSymbol,
         Text: renderSymbol,
