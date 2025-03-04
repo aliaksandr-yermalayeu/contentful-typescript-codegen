@@ -55,7 +55,7 @@ function renderAllContentTypeIds(contentTypes: ContentType[]): string {
 
 function renderEntryType(contentTypes: ContentType[]) {
   return renderUnion(
-    "IEntry",
+    "ContentfulEntry",
     contentTypes.map(contentType => renderContentTypeId(contentType.sys.id)),
   )
 }
