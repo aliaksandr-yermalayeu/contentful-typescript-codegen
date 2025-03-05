@@ -3,16 +3,23 @@ export default function renderInterface({
   extension,
   fields,
   description,
+  type,
 }: {
   name: string
   extension?: string
-  fields: string
+  fields?: string
   description?: string
+  type?: string
 }) {
   return `
     ${description ? `/** ${description} */` : ""}
-    export type ${name} = {
+    export type ${name} = ${
+    type
+      ? `${type}`
+      : `{
       ${fields}
-    } ${extension ? `& ${extension}` : ""}
+    }`
+  }
+    ${extension ? `& ${extension}` : ""}
   `
 }

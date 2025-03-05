@@ -1,4 +1,4 @@
-import { ContentType, Field, FieldType, Sys } from "contentful"
+import { ContentType, Field, FieldType } from "contentful"
 
 import renderInterface from "../typescript/renderInterface"
 import renderField from "./renderField"
@@ -16,11 +16,10 @@ import renderSymbol from "./fields/renderSymbol"
 export default function renderContentType(contentType: ContentType, localization: boolean): string {
   const name = renderContentTypeId(contentType.sys.id)
   const fields = renderContentTypeFields(contentType.fields, localization)
-  const sys = renderSys(contentType.sys)
 
   return `
     ${renderInterface({ name: `${name}Fields`, fields })}
-    ${renderInterface({ name, extension: `Entry<${name}Fields>`, fields: sys })}
+    ${renderInterface({ name, type: `Entry<${name}Fields>` })}
   `
 }
 
@@ -46,23 +45,4 @@ function renderContentTypeFields(fields: Field[], localization: boolean): string
       return renderField(field, functionMap[field.type](field), localization)
     })
     .join("\n")
-}
-
-function renderSys(sys: Sys) {
-  return `
-    sys: {
-      id: string;
-      type: string;
-      createdAt: string;
-      updatedAt: string;
-      locale: string;
-      contentType: {
-        sys: {
-          id: '${sys.id}';
-          linkType: 'ContentType';
-          type: 'Link';
-        }
-      }
-    }
-  `
 }
