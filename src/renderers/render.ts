@@ -48,7 +48,7 @@ function renderAllContentTypes(contentTypes: ContentType[], localization: boolea
 
 function renderAllContentTypeIds(contentTypes: ContentType[]): string {
   return renderUnion(
-    "CONTENT_TYPE",
+    "ContentType",
     contentTypes.map(contentType => `'${contentType.sys.id}'`),
   )
 }
